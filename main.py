@@ -1,17 +1,79 @@
+import random
 from xml.etree.ElementTree import TreeBuilder
 import pyautogui
 import time
-import random
-import win32api
 import win32gui
+import threading
+import keyboard
 loc = pyautogui.locateOnScreen
+# event = threading.Event()
 
-time.sleep(3)
+# def stop():
+#     event.set()
+#     print("stop")
+
+# keyboard.add_hotkey("f9", stop)
+time.sleep(7)
 
 hwnd = win32gui.GetForegroundWindow()
 win32gui.MoveWindow(hwnd, 0, 0, 640, 360, True)
 
-character_location = {"wonderwoman":[8, 0], "lebron":[0, 1], "bugs":[2,0]}
+character_location = {"wonderwoman":[8, 0], 
+                    "lebron":[0, 1], 
+                    "bugs":[2,0], 
+                    "harley":[1, 1], 
+                    "superman":[7, 0], 
+                    "irongiant":[6, 0], 
+                    "steven":[5, 0], 
+                    "reindog":[4, 0], 
+                    "velma":[3, 0], 
+                    "tomjerry":[1, 0],
+                    "arya":[3, 1],
+                    "finn":[4, 1],
+                    "jake":[5, 1],
+                    "garnet":[6, 1],
+                    "taz":[7, 1],
+                    "batman":[8, 1],
+                    "shaggy":[9, 1],
+                    "morty":[0, 0]}
+
+
+def enter_mv():
+    enter_button = loc("./enter-mv.png")
+    if enter_button != None:
+        pyautogui.press("space")
+        print("enter MV triggered")
+        time.sleep(7)
+
+
+def main_menu():
+    menu_button = loc("./main-menu-button.png")
+    if menu_button != None:
+        print("main menu triggered")
+        for x in range(0, 10):
+            pyautogui.press("down")
+            time.sleep(0.1)
+        for x in range(0, 10):
+            pyautogui.press("left")
+            time.sleep(0.1)
+        
+        pyautogui.press("right")
+        time.sleep(0.2)
+        pyautogui.press("v")
+        time.sleep(0.2)
+        pyautogui.press("up")
+        time.sleep(0.2)
+        pyautogui.press("up")
+        time.sleep(0.2)
+        pyautogui.press("up")
+        time.sleep(0.2)
+        pyautogui.press("left")
+        time.sleep(0.2)
+        pyautogui.press("space")
+        time.sleep(0.2)
+        pyautogui.press("v")
+        time.sleep(5)
+
 def select_character(location):
     menu_cog = loc("./select-cog.png")
     if menu_cog != None:
@@ -78,11 +140,26 @@ def rematch():
 def battle():
     print("battle")
     x = 0
-    while x <= 5:
+    while x <= 2:
         pyautogui.press("j")
-        time.sleep(0.3)
-        pyautogui.press('k')
-        x += 1
+        time.sleep(0.2)
+        pyautogui.press("k")
+        time.sleep(0.2)
+        pyautogui.press("d")
+        time.sleep(0.2)
+        pyautogui.press("d")
+        time.sleep(0.2)
+        pyautogui.press("j")
+        time.sleep(0.2)
+        pyautogui.press("j")
+        time.sleep(0.2)
+        pyautogui.press("d")
+        time.sleep(0.2)
+        pyautogui.press("d")
+        time.sleep(0.2)
+        pyautogui.press("d")
+        x+= 1
+
     
 
 
@@ -90,6 +167,8 @@ def battle():
 
 
 while True:
-    select_character(character_location["bugs"])
+    enter_mv()
+    main_menu()
+    select_character(character_location["morty"])
     battle()
     rematch()
