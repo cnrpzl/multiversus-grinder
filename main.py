@@ -1,22 +1,8 @@
-import random
-from xml.etree.ElementTree import TreeBuilder
 import pyautogui
 import time
 import win32gui
-import threading
-import keyboard
 loc = pyautogui.locateOnScreen
-# event = threading.Event()
 
-# def stop():
-#     event.set()
-#     print("stop")
-
-# keyboard.add_hotkey("f9", stop)
-time.sleep(7)
-
-hwnd = win32gui.GetForegroundWindow()
-win32gui.MoveWindow(hwnd, 0, 0, 640, 360, True)
 
 character_location = {"wonderwoman":[8, 0], 
                     "lebron":[0, 1], 
@@ -165,10 +151,15 @@ def battle():
 
     
 
+character_selection = input("Select character by name: ")
+print("Switch to MultiVersus window and be patient.")
+time.sleep(15)
 
+hwnd = win32gui.GetForegroundWindow()
+win32gui.MoveWindow(hwnd, 0, 0, 640, 360, True)
 while True:
     enter_mv()
     main_menu()
-    select_character(character_location["morty"])
+    select_character(character_location[character_selection.lower()])
     battle()
     rematch()
