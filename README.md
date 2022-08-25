@@ -18,7 +18,7 @@ Go to either main menu, or character selection
 
 Start script
 
-Choose character ex: wonderwoman, tomjerry, irongiant
+Choose character ex: wonderwoman, tomjerry, irongiant, random
 
 Switch to multiversus window, make sure it is the window in focus
 
@@ -31,4 +31,4 @@ example: https://streamable.com/yvdvoj
 
 TODO:
 
-random stuff, turning in daily challenges for battlepass points automatically. 
+bug fixes
