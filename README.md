@@ -12,6 +12,8 @@ Switch to multiversus window
 Be patient
 
 
+example: https://streamable.com/yvdvoj
+
 TODO:
 
 random stuff, turning in daily challenges for battlepass points automatically. 
