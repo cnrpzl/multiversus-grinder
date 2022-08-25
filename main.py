@@ -1,18 +1,14 @@
-import random
-from xml.etree.ElementTree import TreeBuilder
 import pyautogui
 import time
 import win32gui
-import threading
-import keyboard
+import logging
+from datetime import datetime
+
+now = datetime.now() # current date and time
+
+date_time = now.strftime("%m_%d_%Y_%H-%M-%S")
+logging.basicConfig(filename=f'mv-grinder-{date_time}.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s', level="DEBUG")
 loc = pyautogui.locateOnScreen
-# event = threading.Event()
-
-# def stop():
-#     event.set()
-#     print("stop")
-
-# keyboard.add_hotkey("f9", stop)
 
 
 character_location = {"wonderwoman":[8, 0], 
@@ -39,14 +35,14 @@ def enter_mv():
     enter_button = loc("./enter-mv.png")
     if enter_button != None:
         pyautogui.press("space")
-        print("enter MV triggered")
+        logging.debug("enter MV triggered")
         time.sleep(7)
 
 
 def main_menu():
     menu_button = loc("./main-menu-button.png")
     if menu_button != None:
-        print("main menu triggered")
+        logging.debug("main menu triggered")
         for x in range(0, 10):
             pyautogui.press("down")
             time.sleep(0.1)
@@ -74,7 +70,7 @@ def main_menu():
 def select_character(location):
     menu_cog = loc("./select-cog.png")
     if menu_cog != None:
-        print("select_char triggered")
+        logging.debug("select_char triggered")
         for x in range(0, 10):
             pyautogui.press("down")
             time.sleep(0.1)
@@ -105,7 +101,7 @@ def select_perks():
         pyautogui.moveTo(perks[0], perks[1])
         time.sleep(1)
         pyautogui.click()
-        print("select perks triggered")
+        logging.debug("select perks triggered")
         for x in range(0, 5):
             pyautogui.press("down")
             time.sleep(0.3)
@@ -129,13 +125,13 @@ def rematch():
     rematch = loc("./rematch.png", confidence=0.8)
     victory = loc("./victory.png", confidence=0.8)
     if rematch != None or victory != None:
-        print("rematch_triggered")
+        logging.debug("rematch_triggered")
         time.sleep(0.3)
         pyautogui.press("v")
 
 
 def battle():
-    print("battle")
+    logging.debug("battle")
     x = 0
     while x <= 2:
         pyautogui.press("j")
@@ -161,16 +157,21 @@ def battle():
 
 
     
+try:
+    character_selection = input("Select character by name: ")
+    print("Switch to MultiVersus window and be patient.")
+    time.sleep(10)
 
-character_selection = input("Select character by name: ")
-print("Switch to MultiVersus window and be patient.")
-time.sleep(15)
-
-hwnd = win32gui.GetForegroundWindow()
-win32gui.MoveWindow(hwnd, 0, 0, 640, 360, True)
-while True:
-    enter_mv()
-    main_menu()
-    select_character(character_location[character_selection.lower()])
-    battle()
-    rematch()
+    hwnd = win32gui.GetForegroundWindow()
+    win32gui.MoveWindow(hwnd, 0, 0, 640, 360, True)
+    while True:
+        enter_mv()
+        main_menu()
+        select_character(character_location[character_selection.lower()])
+        battle()
+        rematch()
+except Exception as e:
+    print(e)
+    logging.exception(e)
+    time.sleep(35)
+    exit(1)
