@@ -36,10 +36,10 @@ character_location = {"wonderwoman":[8, 0],
                     "reindog":[4, 0], 
                     "velma":[3, 0], 
                     "tomjerry":[1, 0],
-                    "arya":[3, 1],
-                    "finn":[4, 1],
-                    "jake":[5, 1],
-                    "garnet":[6, 1],
+                    "arya":[2, 1],
+                    "finn":[3, 1],
+                    "jake":[4, 1],
+                    "garnet":[5, 1],
                     "taz":[6, 1],
                     "batman":[7, 1],
                     "shaggy":[8, 1],
@@ -186,9 +186,11 @@ def battle():
 try:
     character_selection = input("Select character by name: ")
     print("Switch to MultiVersus window and press f1.")
+    print("F2 will stop script execution.")
     keyboard.wait('f1')
     hwnd = win32gui.GetForegroundWindow()
     win32gui.MoveWindow(hwnd, 0, 0, 640, 360, True)
+    time.sleep(1)
     while True and stop != True:
         enter_mv()
         main_menu()
