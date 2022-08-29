@@ -22,7 +22,7 @@ Choose character ex: wonderwoman, tomjerry, irongiant, random
 
 Switch to multiversus window, make sure it is the window in focus
 
-Be patient
+Press F1
 
 Send logs to cnrpzl(at)gmail(dot)com
 
